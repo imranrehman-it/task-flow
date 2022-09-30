@@ -3,9 +3,14 @@ import styled from "styled-components";
 import Card from "../Card";
 import { Typography } from "@mui/material";
 import data from "./data";
+import AddCard from "../AddCard";
 
 function Doing() {
   const [doingList, setDoingList] = useState(data.doing);
+
+  const insertDoingList = ({ title, info }) => {
+    setDoingList((current) => [...current, { title: title, info: info }]);
+  };
 
   return (
     <Stack>
@@ -15,6 +20,8 @@ function Doing() {
       {doingList.map((item) => {
         return <Card title={item.title} info={item.info} />;
       })}
+
+      <AddCard addList={insertDoingList} />
     </Stack>
   );
 }

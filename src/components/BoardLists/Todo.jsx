@@ -25,7 +25,7 @@ function Todo() {
         return <Card title={item.title} info={item.info} />;
       })}
 
-      <AddCard insertTodoList={insertTodoList} />
+      <AddCard addList={insertTodoList} />
     </Stack>
   );
 }

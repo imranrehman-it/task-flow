@@ -10,7 +10,7 @@ import TextField from "@mui/material/TextField";
 
 import styled from "styled-components";
 
-function AddCard({ insertTodoList }) {
+function AddCard({ addList }) {
   const [title, setTitle] = useState("");
   const [info, setInfo] = useState("");
   const [renderTitle, setRenderTitle] = useState(false);
@@ -30,7 +30,7 @@ function AddCard({ insertTodoList }) {
   const saveHandler = () => {
     console.log(title);
     console.log(info);
-    insertTodoList({ title: title, info: info });
+    addList({ title: title, info: info });
     setRenderTitle(false);
   };
 

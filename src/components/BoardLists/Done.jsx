@@ -3,9 +3,15 @@ import styled from "styled-components";
 import Card from "../Card";
 import { Typography } from "@mui/material";
 import data from "./data";
+import AddCard from "../AddCard";
 
 function Done() {
   const [doneList, setDoneList] = useState(data.done);
+
+  const insertDoneList = ({ title, info }) => {
+    setDoneList((current) => [...current, { title: title, info: info }]);
+  };
+
   return (
     <Stack>
       <Typography sx={{ fontWeight: "bold" }} variant="h4" component="div">
@@ -14,6 +20,7 @@ function Done() {
       {doneList.map((item) => {
         return <Card title={item.title} info={item.info} />;
       })}
+      <AddCard addList={insertDoneList} />
     </Stack>
   );
 }
