@@ -8,8 +8,11 @@ import AddCard from "../AddCard";
 function Doing() {
   const [doingList, setDoingList] = useState(data.doing);
 
-  const insertDoingList = ({ title, info }) => {
-    setDoingList((current) => [...current, { title: title, info: info }]);
+  const insertDoingList = ({ title, info, tags }) => {
+    setDoingList((current) => [
+      ...current,
+      { title: title, info: info, tags: tags },
+    ]);
   };
 
   return (
@@ -18,7 +21,7 @@ function Doing() {
         Doing
       </Typography>
       {doingList.map((item) => {
-        return <Card title={item.title} info={item.info} />;
+        return <Card title={item.title} info={item.info} tags={item.tags} />;
       })}
 
       <AddCard addList={insertDoingList} />

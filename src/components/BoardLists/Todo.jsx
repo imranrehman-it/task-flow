@@ -11,8 +11,11 @@ import { AiFillPlusCircle } from "react-icons/ai";
 function Todo() {
   const [todoList, setTodoList] = useState(data.todo); //array type
 
-  const insertTodoList = ({ title, info }) => {
-    setTodoList((current) => [...current, { title: title, info: info }]);
+  const insertTodoList = ({ title, info, tags }) => {
+    setTodoList((current) => [
+      ...current,
+      { title: title, info: info, tags: tags },
+    ]);
   };
 
   return (
@@ -22,7 +25,7 @@ function Todo() {
       </Typography>
 
       {todoList.map((item) => {
-        return <Card title={item.title} info={item.info} />;
+        return <Card title={item.title} info={item.info} tags={item.tags} />;
       })}
 
       <AddCard addList={insertTodoList} />

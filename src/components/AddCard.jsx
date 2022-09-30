@@ -30,7 +30,7 @@ function AddCard({ addList }) {
   const saveHandler = () => {
     console.log(title);
     console.log(info);
-    addList({ title: title, info: info });
+    addList({ title: title, info: info, tags: [] });
     setRenderTitle(false);
   };
 

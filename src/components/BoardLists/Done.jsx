@@ -8,8 +8,11 @@ import AddCard from "../AddCard";
 function Done() {
   const [doneList, setDoneList] = useState(data.done);
 
-  const insertDoneList = ({ title, info }) => {
-    setDoneList((current) => [...current, { title: title, info: info }]);
+  const insertDoneList = ({ title, info, tags }) => {
+    setDoneList((current) => [
+      ...current,
+      { title: title, info: info, tags: tags },
+    ]);
   };
 
   return (
@@ -18,7 +21,7 @@ function Done() {
         Done
       </Typography>
       {doneList.map((item) => {
-        return <Card title={item.title} info={item.info} />;
+        return <Card title={item.title} info={item.info} tags={item.tags} />;
       })}
       <AddCard addList={insertDoneList} />
     </Stack>
