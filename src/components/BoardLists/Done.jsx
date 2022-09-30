@@ -1,17 +1,19 @@
-import React from "react";
+import React, { useState } from "react";
 import styled from "styled-components";
 import Card from "../Card";
 import { Typography } from "@mui/material";
+import data from "./data";
 
 function Done() {
+  const [doneList, setDoneList] = useState(data.done);
   return (
     <Stack>
-      <Typography sx={{ fontWeight: "bold" }} variant="h3" component="div">
+      <Typography sx={{ fontWeight: "bold" }} variant="h4" component="div">
         Done
       </Typography>
-      <Card />
-      <Card />
-      <Card />
+      {doneList.map((item) => {
+        return <Card title={item.title} info={item.info} />;
+      })}
     </Stack>
   );
 }

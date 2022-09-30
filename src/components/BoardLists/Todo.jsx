@@ -5,9 +5,15 @@ import { Typography } from "@mui/material";
 import Card from "../Card";
 import data from "./data";
 import AddCard from "../AddCard";
+import Button from "@mui/material/Button";
+import { AiFillPlusCircle } from "react-icons/ai";
 
 function Todo() {
   const [todoList, setTodoList] = useState(data.todo); //array type
+
+  const insertTodoList = ({ title, info }) => {
+    setTodoList((current) => [...current, { title: title, info: info }]);
+  };
 
   return (
     <Stack>
@@ -19,7 +25,7 @@ function Todo() {
         return <Card title={item.title} info={item.info} />;
       })}
 
-      <AddCard />
+      <AddCard insertTodoList={insertTodoList} />
     </Stack>
   );
 }
