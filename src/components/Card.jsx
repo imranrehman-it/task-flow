@@ -1,4 +1,4 @@
-import React from "react";
+import React, { useState } from "react";
 import Cards from "@mui/material/Card";
 import CardActions from "@mui/material/CardActions";
 import CardContent from "@mui/material/CardContent";
@@ -17,20 +17,7 @@ const bull = (
   ></Box>
 );
 
-function Card({ title, info, tags }) {
-  const [anchorEl, setAnchorEl] = React.useState(null);
-
-  const handleClick = (event) => {
-    setAnchorEl(event.currentTarget);
-  };
-
-  const handleClose = () => {
-    setAnchorEl(null);
-  };
-
-  const open = Boolean(anchorEl);
-  const id = open ? "simple-popover" : undefined;
-
+function Card({ title, info, tags, update }) {
   return (
     <CardBlock sx={{ borderRadius: "10px" }}>
       <CardContent>
@@ -51,22 +38,7 @@ function Card({ title, info, tags }) {
               />
             );
           })}
-          <Chip
-            icon={<AiFillPlusCircle />}
-            label="Add Tag"
-            size="small"
-            onClick={handleClick}
-          />
-          <Popover
-            id={id}
-            open={open}
-            anchorEl={anchorEl}
-            onClose={handleClose}
-            anchorOrigin={{
-              vertical: "bottom",
-              horizontal: "left",
-            }}
-          ></Popover>
+          <Chip icon={<AiFillPlusCircle />} label="Add Tag" size="small" />
         </Stack>
         <Typography variant="body1">{info}</Typography>
       </CardContent>
