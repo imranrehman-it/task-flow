@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import React, { useEffect, useState } from "react";
 import Cards from "@mui/material/Card";
 import CardActions from "@mui/material/CardActions";
 import CardContent from "@mui/material/CardContent";
@@ -20,12 +20,11 @@ const bull = (
 
 function Card({ title, info, tags, update }) {
   const [tagList, setTagList] = useState(tags);
+  const [color, setColor] = useState("grey");
+  const [name, setName] = useState("test");
 
-  const insertTag = ({ tagList }) => {
-    setTagList((current) => [
-      ...current,
-      { color: "#B266FF", name: "important" },
-    ]);
+  const insertTag = ({ color, name }) => {
+    setTagList((current) => [...current, { color: color, name: name }]);
   };
 
   return (
@@ -34,7 +33,12 @@ function Card({ title, info, tags, update }) {
         <Typography variant="h5" fontWeight="bold" component="div">
           {title}
         </Typography>
-        <AddTags tags={tagList} insertTag={insertTag} />
+        <AddTags
+          tags={tagList}
+          insertTag={insertTag}
+          setColor={setColor}
+          setName={setName}
+        />
         <Typography variant="body1">{info}</Typography>
       </CardContent>
     </CardBlock>
