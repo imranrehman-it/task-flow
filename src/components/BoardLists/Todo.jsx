@@ -25,7 +25,14 @@ function Todo() {
       </Typography>
 
       {todoList.map((item) => {
-        return <Card title={item.title} info={item.info} tags={item.tags} />;
+        return (
+          <Card
+            title={item.title}
+            info={item.info}
+            tags={item.tags}
+            update={insertTodoList}
+          />
+        );
       })}
 
       <AddCard addList={insertTodoList} />

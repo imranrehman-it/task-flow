@@ -9,6 +9,7 @@ import Stack from "@mui/material/Stack";
 import { AiFillPlusCircle } from "react-icons/ai";
 import Popover from "@mui/material/Popover";
 import styled from "styled-components";
+import AddTags from "./AddTags";
 
 const bull = (
   <Box
@@ -18,28 +19,22 @@ const bull = (
 );
 
 function Card({ title, info, tags, update }) {
+  const [tagList, setTagList] = useState(tags);
+
+  const insertTag = ({ tagList }) => {
+    setTagList((current) => [
+      ...current,
+      { color: "#B266FF", name: "important" },
+    ]);
+  };
+
   return (
     <CardBlock sx={{ borderRadius: "10px" }}>
       <CardContent>
         <Typography variant="h5" fontWeight="bold" component="div">
           {title}
         </Typography>
-        <Stack direction="row" spacing={1}>
-          {tags.map((tag) => {
-            return (
-              <Chip
-                sx={{
-                  background: tag.color,
-                  fontWeight: "bold",
-                }}
-                key={tag.name}
-                size="small"
-                label={tag.name}
-              />
-            );
-          })}
-          <Chip icon={<AiFillPlusCircle />} label="Add Tag" size="small" />
-        </Stack>
+        <AddTags tags={tagList} insertTag={insertTag} />
         <Typography variant="body1">{info}</Typography>
       </CardContent>
     </CardBlock>
