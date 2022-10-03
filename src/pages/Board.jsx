@@ -7,11 +7,14 @@ import styled from "styled-components";
 
 function Board() {
   return (
-    <BoardStack>
-      <Todo />
-      <Doing />
-      <Done />
-    </BoardStack>
+    <>
+      <h1>Board</h1>
+      <BoardStack>
+        <Todo />
+        <Doing />
+        <Done />
+      </BoardStack>
+    </>
   );
 }
 

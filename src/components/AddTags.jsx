@@ -8,13 +8,62 @@ import Typography from "@mui/material/Typography";
 import Modal from "@mui/material/Modal";
 import TextField from "@mui/material/TextField";
 
+const style = {
+  position: "absolute",
+  top: "50%",
+  left: "50%",
+  transform: "translate(-50%, -50%)",
+  width: 400,
+  bgcolor: "background.paper",
+  border: "2px solid #000",
+  boxShadow: 24,
+  p: 4,
+};
+
 const AddTags = ({ tags, insertTag, setName, setColor }) => {
-  const clickHandler = () => {
-    insertTag({ color: "yellow", name: "hello" });
+  const [open, setOpen] = React.useState(false);
+  const handleOpen = () => setOpen(true);
+  const handleClose = () => {
+    setOpen(false);
+    insertTag({ color: tagcolor, name: tagname });
+  };
+  const [tagname, setTagName] = useState("");
+  const [tagcolor, setTagColor] = useState("yellow");
+
+  const clickHandler = async () => {
+    handleOpen();
+  };
+
+  const changeHandler = (e) => {
+    setTagName(e.target.value);
   };
 
   return (
     <>
+      <Modal
+        open={open}
+        onClose={handleClose}
+        aria-labelledby="modal-modal-title"
+        aria-describedby="modal-modal-description"
+      >
+        <Box sx={style}>
+          <TextField
+            multiline
+            id="outlined-basic"
+            label="Title"
+            fullWidth
+            variant="outlined"
+            InputProps={{
+              style: {
+                fontSize: "1.5rem",
+                fontWeight: "700",
+                lineHeight: "1.334",
+              },
+            }}
+            onChange={changeHandler}
+          />
+        </Box>
+      </Modal>
       <Stack sx={{ flexWrap: "wrap", gap: 1 }} direction="row" spacing={1}>
         {tags.map((tag) => {
           return (
