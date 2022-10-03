@@ -26,16 +26,19 @@ const style = {
 const AddTags = ({ tags, insertTag, setName, setColor }) => {
   const [blockPickerColor, setBlockPickerColor] = useState("#37d67a");
   const [open, setOpen] = React.useState(false);
-  const handleOpen = () => setOpen(true);
+  const [tagname, setTagName] = useState("");
+  const [tagcolor, setTagColor] = useState("");
+
   const handleClose = () => {
     setOpen(false);
-    insertTag({ color: blockPickerColor, name: tagname });
+    if (tagname.length > 0) {
+      insertTag({ color: blockPickerColor, name: tagname });
+    }
+    setTagName("");
   };
-  const [tagname, setTagName] = useState("");
-  const [tagcolor, setTagColor] = useState("yellow");
 
-  const clickHandler = async () => {
-    handleOpen();
+  const handleOpen = () => {
+    setOpen(true);
   };
 
   const changeHandler = (e) => {
@@ -95,7 +98,7 @@ const AddTags = ({ tags, insertTag, setName, setColor }) => {
         })}
         <Chip
           icon={<AiFillPlusCircle />}
-          onClick={clickHandler}
+          onClick={handleOpen}
           label="Add Tag"
           size="small"
         />

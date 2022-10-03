@@ -7,6 +7,7 @@ import data from "./data";
 import AddCard from "../AddCard";
 import Button from "@mui/material/Button";
 import { AiFillPlusCircle } from "react-icons/ai";
+import Search from "../Search";
 
 function Todo() {
   const [todoList, setTodoList] = useState(data.todo); //array type
@@ -23,7 +24,6 @@ function Todo() {
       <Typography sx={{ fontWeight: "bold" }} variant="h4" component="div">
         To-Do
       </Typography>
-
       {todoList.map((item) => {
         return (
           <Card
@@ -34,7 +34,6 @@ function Todo() {
           />
         );
       })}
-
       <AddCard addList={insertTodoList} />
     </Stack>
   );
