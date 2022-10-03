@@ -7,6 +7,8 @@ import Button from "@mui/material/Button";
 import Typography from "@mui/material/Typography";
 import Modal from "@mui/material/Modal";
 import TextField from "@mui/material/TextField";
+import { BlockPicker } from "react-color";
+import styled from "styled-components";
 
 const style = {
   position: "absolute",
@@ -18,14 +20,16 @@ const style = {
   border: "2px solid #000",
   boxShadow: 24,
   p: 4,
+  borderRadius: "10px",
 };
 
 const AddTags = ({ tags, insertTag, setName, setColor }) => {
+  const [blockPickerColor, setBlockPickerColor] = useState("#37d67a");
   const [open, setOpen] = React.useState(false);
   const handleOpen = () => setOpen(true);
   const handleClose = () => {
     setOpen(false);
-    insertTag({ color: tagcolor, name: tagname });
+    insertTag({ color: blockPickerColor, name: tagname });
   };
   const [tagname, setTagName] = useState("");
   const [tagcolor, setTagColor] = useState("yellow");
@@ -47,6 +51,7 @@ const AddTags = ({ tags, insertTag, setName, setColor }) => {
         aria-describedby="modal-modal-description"
       >
         <Box sx={style}>
+          <h3>Edit Tag</h3>
           <TextField
             multiline
             id="outlined-basic"
@@ -62,6 +67,16 @@ const AddTags = ({ tags, insertTag, setName, setColor }) => {
             }}
             onChange={changeHandler}
           />
+
+          <ColorSelector>
+            <h3>Color Picker</h3>
+            <BlockPicker
+              color={blockPickerColor}
+              onChange={(color) => {
+                setBlockPickerColor(color.hex);
+              }}
+            />
+          </ColorSelector>
         </Box>
       </Modal>
       <Stack sx={{ flexWrap: "wrap", gap: 1 }} direction="row" spacing={1}>
@@ -89,4 +104,7 @@ const AddTags = ({ tags, insertTag, setName, setColor }) => {
   );
 };
 
+const ColorSelector = styled.div`
+  width: fill;
+`;
 export default AddTags;
