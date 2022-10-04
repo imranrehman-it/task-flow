@@ -9,6 +9,8 @@ import Modal from "@mui/material/Modal";
 import TextField from "@mui/material/TextField";
 import { BlockPicker } from "react-color";
 import styled from "styled-components";
+import { Editor } from "react-draft-wysiwyg";
+import "react-draft-wysiwyg/dist/react-draft-wysiwyg.css";
 
 const style = {
   position: "absolute",
@@ -46,7 +48,7 @@ const AddTags = ({ tags, insertTag, setName, setColor }) => {
   };
 
   return (
-    <>
+    <TagList>
       <Modal
         open={open}
         onClose={handleClose}
@@ -70,7 +72,6 @@ const AddTags = ({ tags, insertTag, setName, setColor }) => {
             }}
             onChange={changeHandler}
           />
-
           <ColorSelector>
             <h3>Color Picker</h3>
             <BlockPicker
@@ -103,11 +104,16 @@ const AddTags = ({ tags, insertTag, setName, setColor }) => {
           size="small"
         />
       </Stack>
-    </>
+    </TagList>
   );
 };
 
 const ColorSelector = styled.div`
   width: fill;
+`;
+
+const TagList = styled.div`
+  margin-top: 0.5rem;
+  margin-bottom: 0.5rem;
 `;
 export default AddTags;

@@ -30,6 +30,7 @@ function Todo() {
             title={item.title}
             info={item.info}
             tags={item.tags}
+            details={item.details}
             update={insertTodoList}
           />
         );
@@ -44,7 +45,7 @@ const Stack = styled.div`
   margin: 1rem;
   background-color: rgb(239, 239, 239);
   border-radius: 10px;
-  width: 20%;
+  width: 25%;
   height: fit-content;
 
   display: flex;
