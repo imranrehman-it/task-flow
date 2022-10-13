@@ -41,7 +41,7 @@ function AddCard({ addList }) {
               Add a card
             </Button>
           </CardActions>
-        </CardBlock>
+        </CardBlock> 
       )}
 
       {renderTitle && (
