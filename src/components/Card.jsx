@@ -32,10 +32,12 @@ const style = {
 
 function Card({ title, info, tags, update, details }) {
   const [tagList, setTagList] = useState(tags);
-  const [color, setColor] = useState("grey");
-  const [name, setName] = useState("test");
   const [open, setOpen] = useState(false);
   const [value, setValue] = useState(info);
+  const [color, setColor] = useState("gray");
+  const [name, setName] = useState("TEST");
+  const [_title, setTitle] = useState(title);
+  const [_info, setInfo] = useState(info);
   const [editorState, setEditorState] = React.useState(() =>
     EditorState.createEmpty()
   );
@@ -52,7 +54,7 @@ function Card({ title, info, tags, update, details }) {
       <InnerCard sx={{ borderRadius: "10px" }}>
         <CardContent>
           <Typography variant="h5" fontWeight="bold" component="div">
-            {title}
+            {_title}
           </Typography>
           <AddTags
             tags={tagList}
@@ -60,12 +62,14 @@ function Card({ title, info, tags, update, details }) {
             setColor={setColor}
             setName={setName}
           />
-          <Typography variant="body1">{info}</Typography>
+          <Typography variant="body1">{_info}</Typography>
         </CardContent>
         <CardActions>
           <OpenCard
-            title={title}
-            info={info}
+            title={_title}
+            setTitle={setTitle}
+            info={_info}
+            setInfo={setInfo}
             AddTags={
               <AddTags
                 tags={tagList}

@@ -1,6 +1,7 @@
 import useId from "@mui/material/utils/useId";
 
 const data = {
+  title: "Board",
   todo: [
     {
       id: 1,

@@ -17,12 +17,15 @@ const style = {
   borderRadius: "10px",
 };
 
-function OpenCard({ title, info, details, AddTags }) {
+function OpenCard({ title, info, details, AddTags, setInfo, setTitle }) {
   const [open, setOpen] = React.useState(false);
   const [edit, setEdit] = useState(false);
   const handleOpen = () => setOpen(true);
   const handleClose = () => setOpen(false);
-  const handleEdit = () => setEdit(!edit);
+  const handleEdit = () => {
+    setEdit(!edit);
+    setTitle("test");
+  };
 
   return (
     <div>
