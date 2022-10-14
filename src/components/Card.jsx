@@ -38,6 +38,7 @@ function Card({ title, info, tags, update, details }) {
   const [name, setName] = useState("TEST");
   const [_title, setTitle] = useState(title);
   const [_info, setInfo] = useState(info);
+  const [_details, setDetails] = useState(details);
   const [editorState, setEditorState] = React.useState(() =>
     EditorState.createEmpty()
   );
@@ -70,6 +71,8 @@ function Card({ title, info, tags, update, details }) {
             setTitle={setTitle}
             info={_info}
             setInfo={setInfo}
+            details={_details}
+            setDetails={setDetails}
             AddTags={
               <AddTags
                 tags={tagList}
@@ -78,7 +81,6 @@ function Card({ title, info, tags, update, details }) {
                 setName={setName}
               />
             }
-            details={details}
           />
         </CardActions>
       </InnerCard>
@@ -91,7 +93,7 @@ function Card({ title, info, tags, update, details }) {
         >
           <Box sx={style}>
             <Typography id="modal-modal-title" variant="h4" component="h2">
-              {title}
+              {_title}
             </Typography>
             <AddTags
               tags={tagList}
@@ -103,7 +105,7 @@ function Card({ title, info, tags, update, details }) {
               Description
             </Typography>
             <Typography id="modal-modal-title" variant="h6" component="h2">
-              {details}
+              {_details}
             </Typography>
           </Box>
         </Modal>

@@ -4,6 +4,7 @@ import Box from "@mui/material/Box";
 import Button from "@mui/material/Button";
 import Typography from "@mui/material/Typography";
 import Modal from "@mui/material/Modal";
+import styled from "styled-components";
 
 const style = {
   position: "absolute",
@@ -17,7 +18,15 @@ const style = {
   borderRadius: "10px",
 };
 
-function OpenCard({ title, info, details, AddTags, setInfo, setTitle }) {
+function OpenCard({
+  title,
+  info,
+  AddTags,
+  setInfo,
+  setTitle,
+  details,
+  setDetails,
+}) {
   const [open, setOpen] = React.useState(false);
   const [edit, setEdit] = useState(false);
   const handleOpen = () => setOpen(true);
@@ -25,6 +34,10 @@ function OpenCard({ title, info, details, AddTags, setInfo, setTitle }) {
   const handleEdit = () => {
     setEdit(!edit);
     setTitle("test");
+  };
+
+  const editDescription = (e) => {
+    setDetails(e.target.value);
   };
 
   return (
@@ -51,7 +64,7 @@ function OpenCard({ title, info, details, AddTags, setInfo, setTitle }) {
           )}
           {edit && (
             <div>
-              <textarea value={details}></textarea>
+              <textarea value={details} onChange={editDescription}></textarea>
             </div>
           )}
           <Button onClick={handleEdit}>Edit</Button>
