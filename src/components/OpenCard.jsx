@@ -33,11 +33,14 @@ function OpenCard({
   const handleClose = () => setOpen(false);
   const handleEdit = () => {
     setEdit(!edit);
-    setTitle("test");
   };
 
   const editDescription = (e) => {
     setDetails(e.target.value);
+  };
+
+  const editTitle = (e) => {
+    console.log(e.target.value);
   };
 
   return (
@@ -54,7 +57,13 @@ function OpenCard({
             {title}
           </Typography>
           {AddTags}
-          <Typography id="modal-modal-title" variant="h5" component="h2">
+          <Typography
+            contentEditable="true"
+            onChange={editTitle}
+            id="modal-modal-title"
+            variant="h5"
+            component="h2"
+          >
             Description
           </Typography>
           {!edit && (
