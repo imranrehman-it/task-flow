@@ -5,6 +5,8 @@ import Button from "@mui/material/Button";
 import Typography from "@mui/material/Typography";
 import Modal from "@mui/material/Modal";
 import styled from "styled-components";
+import Cohere from "cohere-js";
+Cohere.init("tq4YZcLnVHJLzn9yUvDrWwnJdYLKWNgqcvwNet9Q");
 
 const style = {
   position: "absolute",
