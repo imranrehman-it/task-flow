@@ -2,6 +2,10 @@ import useId from "@mui/material/utils/useId";
 
 const data = {
   title: "Board",
+  BoardImage:
+    "https://static.vecteezy.com/system/resources/previews/005/084/897/original/expert-marketing-broker-stock-trader-present-stock-market-in-year-showing-growth-rates-on-board-isolated-free-vector.jpg",
+  BoardDescription:
+    "This is the first board, simply used as a way to keep track of task to do, inp-progress, and compleated",
   todo: [
     {
       id: 1,
