@@ -3,53 +3,63 @@ import BoardCard from "../components/BoardCard";
 import data from "../components/BoardLists/data";
 import Board from "./Board";
 import styled from "styled-components";
+import { Typography } from "@mui/material";
 
 function AllBoards() {
   return (
-    <BoardGrid>
-      <BoardCard
-        name={data.title}
-        desc={data.BoardDescription}
-        img={
-          data.BoardImage[Math.floor(Math.random() * data.BoardImage.length)]
-        }
-      />
-      <BoardCard
-        name={data.title}
-        desc={data.BoardDescription}
-        img={
-          data.BoardImage[Math.floor(Math.random() * data.BoardImage.length)]
-        }
-      />
-      <BoardCard
-        name={data.title}
-        desc={data.BoardDescription}
-        img={
-          data.BoardImage[Math.floor(Math.random() * data.BoardImage.length)]
-        }
-      />
-      <BoardCard
-        name={data.title}
-        desc={data.BoardDescription}
-        img={
-          data.BoardImage[Math.floor(Math.random() * data.BoardImage.length)]
-        }
-      />
-      <BoardCard
-        name={data.title}
-        desc={data.BoardDescription}
-        img={
-          data.BoardImage[Math.floor(Math.random() * data.BoardImage.length)]
-        }
-      />
-      <BoardCard
-        name={data.title}
-        desc={data.BoardDescription}
-        img={
-          data.BoardImage[Math.floor(Math.random() * data.BoardImage.length)]
-        }
-      />
-    </BoardGrid>
+    <>
+      <Typography
+        sx={{ fontWeight: "bold", marginLeft: "1rem" }}
+        variant="h2"
+        component="div"
+      >
+        Your Boards
+      </Typography>
+      <BoardGrid>
+        <BoardCard
+          name={data.title}
+          desc={data.BoardDescription}
+          img={
+            data.BoardImage[Math.floor(Math.random() * data.BoardImage.length)]
+          }
+        />
+        <BoardCard
+          name={data.title}
+          desc={data.BoardDescription}
+          img={
+            data.BoardImage[Math.floor(Math.random() * data.BoardImage.length)]
+          }
+        />
+        <BoardCard
+          name={data.title}
+          desc={data.BoardDescription}
+          img={
+            data.BoardImage[Math.floor(Math.random() * data.BoardImage.length)]
+          }
+        />
+        <BoardCard
+          name={data.title}
+          desc={data.BoardDescription}
+          img={
+            data.BoardImage[Math.floor(Math.random() * data.BoardImage.length)]
+          }
+        />
+        <BoardCard
+          name={data.title}
+          desc={data.BoardDescription}
+          img={
+            data.BoardImage[Math.floor(Math.random() * data.BoardImage.length)]
+          }
+        />
+        <BoardCard
+          name={data.title}
+          desc={data.BoardDescription}
+          img={
+            data.BoardImage[Math.floor(Math.random() * data.BoardImage.length)]
+          }
+        />
+      </BoardGrid>
+    </>
   );
 }
 

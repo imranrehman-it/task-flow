@@ -8,8 +8,8 @@ function App() {
     <>
       <Navbar />
       <div className="App">
-        <Board />
         <AllBoards />
+        <Board />
       </div>
     </>
   );
