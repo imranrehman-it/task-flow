@@ -2,8 +2,11 @@ import useId from "@mui/material/utils/useId";
 
 const data = {
   title: "Board",
-  BoardImage:
+  BoardImage: [
     "https://static.vecteezy.com/system/resources/previews/005/084/897/original/expert-marketing-broker-stock-trader-present-stock-market-in-year-showing-growth-rates-on-board-isolated-free-vector.jpg",
+    "https://static.vecteezy.com/system/resources/thumbnails/002/884/442/small/the-management-of-the-company-is-planning-to-adjust-the-trade-direction-in-order-to-increase-the-profit-for-the-company-vector.jpg",
+    "https://cdn.dribbble.com/users/3416941/screenshots/16473464/media/50af8cfcb065f268b328e135b92fa2d9.jpg?compress=1&resize=400x300",
+  ],
   BoardDescription:
     "This is the first board, simply used as a way to keep track of task to do, inp-progress, and compleated",
   todo: [

@@ -4,10 +4,11 @@ import CardContent from "@mui/material/CardContent";
 import CardMedia from "@mui/material/CardMedia";
 import Typography from "@mui/material/Typography";
 import { CardActionArea } from "@mui/material";
+import styled from "styled-components";
 
 const BoardCard = ({ name, desc, img }) => {
   return (
-    <Card sx={{ maxWidth: 345 }}>
+    <Card sx={styles}>
       <CardActionArea>
         <CardMedia
           component="img"
@@ -26,6 +27,11 @@ const BoardCard = ({ name, desc, img }) => {
       </CardActionArea>
     </Card>
   );
+};
+
+const styles = {
+  margin: "1rem",
+  maxWidth: 345,
 };
 
 export default BoardCard;
