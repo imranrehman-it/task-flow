@@ -21,11 +21,12 @@ function Navbar() {
     <Box sx={{ flexGrow: 1 }}>
       <AppBar position="fixed" color="primary" z-index="999">
         <Toolbar sx={{ display: "flex", justifyContent: "space-between" }}>
-          <Button color="inherit" onClick={routeToHome}>
-            <Typography variant="h6" component="div" sx={{ flexGrow: 1 }}>
-              Trello
-            </Typography>
-          </Button>
+          <img
+            src="https://cdn.discordapp.com/attachments/262818409513877504/1033961346338926702/taskflow-high-resolution-logo-white-on-transparent-background.png"
+            width="80px"
+            height="50px"
+            onClick={routeToHome}
+          />
 
           <Button color="inherit" onClick={routeToLogin}>
             Login
