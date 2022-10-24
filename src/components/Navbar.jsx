@@ -20,15 +20,13 @@ function Navbar() {
   return (
     <Box sx={{ flexGrow: 1 }}>
       <AppBar position="fixed" color="primary" z-index="999">
-        <Toolbar>
-          <Typography
-            onClick={routeToHome}
-            variant="h6"
-            component="div"
-            sx={{ flexGrow: 1 }}
-          >
-            Trello
-          </Typography>
+        <Toolbar sx={{ display: "flex", justifyContent: "space-between" }}>
+          <Button color="inherit" onClick={routeToHome}>
+            <Typography variant="h6" component="div" sx={{ flexGrow: 1 }}>
+              Trello
+            </Typography>
+          </Button>
+
           <Button color="inherit" onClick={routeToLogin}>
             Login
           </Button>

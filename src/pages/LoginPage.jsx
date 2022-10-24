@@ -1,4 +1,5 @@
 import React from "react";
+import styled from "styled-components";
 
 export const LoginPage = () => {
   const register = async () => {};
@@ -7,5 +8,9 @@ export const LoginPage = () => {
 
   const logout = async () => {};
 
-  return <div>LoginPage</div>;
+  return <LoginPageStyle>LoginPage</LoginPageStyle>;
 };
+
+const LoginPageStyle = styled.div`
+  margin-top: 80px;
+`;
