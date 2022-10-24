@@ -29,6 +29,7 @@ const BoardStack = styled.div`
   display: flex;
   flex-direction: row;
   align-items: flex-start;
+  position: absolute;
 `;
 
 export default Board;
