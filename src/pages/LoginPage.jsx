@@ -1,125 +1,130 @@
-import React, { useState, useRef } from "react";
-import styled from "styled-components";
-import { auth, signup, useAuth } from "./firebase-config";
+import { useState } from "react";
 import {
   createUserWithEmailAndPassword,
-  onAuthStateChanged,
   signInWithEmailAndPassword,
+  onAuthStateChanged,
   signOut,
+  getAuth,
 } from "firebase/auth";
-import { Form, Card, Button } from "react-bootstrap";
+import { auth } from "./firebase-config";
 
 const LoginPage = () => {
-  const signupEmailRef = useRef();
-  const signupPasswordRef = useRef();
-  const signupPasswordConfirmationRef = useRef();
+  const [registerEmail, setRegisterEmail] = useState("");
+  const [registerPassword, setRegisterPassword] = useState("");
+  const [loginEmail, setLoginEmail] = useState("");
+  const [loginPassword, setLoginPassword] = useState("");
+  const [registerPage, setRegisterPage] = useState(true);
 
-  const loginEmailRef = useRef();
-  const loginPasswordRef = useRef();
+  const [user, setUser] = useState({});
 
-  const currentUser = useAuth();
-  const [signIn, setSignIn] = useState(false);
+  const auth = getAuth();
+  onAuthStateChanged(auth, (user) => {
+    if (user) {
+      setUser(user);
+      const uid = user.uid;
+    } else {
+      console.log("no user");
+    }
+  });
 
-  const signup = async () => {
-    await createUserWithEmailAndPassword(
-      auth,
-      signupEmailRef.current.value,
-      signupPasswordRef.current.value
-    );
+  const register = async () => {
+    if (user) {
+      createUserWithEmailAndPassword(auth, registerEmail, registerPassword)
+        .then((userCredential) => {
+          const user = userCredential.user;
+          console.log("done");
+        })
+        .catch((error) => {
+          console.log(error.code);
+          console.log(error.message);
+          // ..
+        });
+    } else {
+      console.log("already signed in");
+    }
   };
 
-  const signin = async () => {
-    await signInWithEmailAndPassword(
-      auth,
-      loginEmailRef.current.value,
-      loginPasswordRef.current.value
-    );
+  const login = async () => {
+    signInWithEmailAndPassword(auth, loginEmail, loginPassword)
+      .then((userCredential) => {
+        // Signed in
+        const user = userCredential.user;
+        console.log(user.email);
+        // ...
+      })
+      .catch((error) => {
+        console.log(error.code);
+        console.log(error.code);
+      });
   };
 
-  const logOut = async () => {
-    signOut(auth);
+  const logout = async () => {
+    signOut(auth)
+      .then(() => {
+        console.log("Sign-out successful.");
+      })
+      .catch((error) => {
+        console.log(error.message + ":error");
+      });
+  };
+
+  const toRegister = async () => {
+    await logout();
+    setRegisterPage(!registerPage);
+  };
+
+  const toLogin = async () => {
+    await logout();
+    setRegisterPage(!registerPage);
   };
 
   return (
-    <div>
-      {!signIn && (
-        <>
-          <Card>
-            <Card.Body>
-              <h2 className="text-center mb-4">Sign Up</h2>
-              <Form>
-                <Form.Group id="email">
-                  <Form.Label>Email</Form.Label>
-                  <Form.Control type="email" ref={signupEmailRef} required />
-                </Form.Group>
-                <Form.Group id="password">
-                  <Form.Label>Password</Form.Label>
-                  <Form.Control
-                    type="password"
-                    ref={signupPasswordRef}
-                    required
-                  />
-                </Form.Group>
-                <Form.Group id="password-confirm">
-                  <Form.Label>Password Confirmation</Form.Label>
-                  <Form.Control
-                    type="password"
-                    ref={signupPasswordConfirmationRef}
-                    required
-                  />
-                </Form.Group>
-                <Button className="w-100 mt-2" type="submit" onClick={signup}>
-                  Sign Up
-                </Button>
-                <div>{currentUser?.email}</div>
-              </Form>
-            </Card.Body>
-          </Card>
-          <div
-            className="w-100 text-center mt-2"
-            onClick={() => setSignIn(!signIn)}
-          >
-            Already have an account? Login
-          </div>
-        </>
+    <div className="App">
+      {registerPage && (
+        <div>
+          <h3> Register User </h3>
+          <input
+            placeholder="Email..."
+            onChange={(event) => {
+              setRegisterEmail(event.target.value);
+            }}
+          />
+          <input
+            placeholder="Password..."
+            onChange={(event) => {
+              setRegisterPassword(event.target.value);
+            }}
+          />
+
+          <button onClick={register}> Create User</button>
+          <button onClick={toLogin}>already a user</button>
+        </div>
       )}
-      {signIn && (
-        <>
-          <Card>
-            <Card.Body>
-              <h2 className="text-center mb-4">Login</h2>
-              <Form>
-                <Form.Group id="email">
-                  <Form.Label>Email</Form.Label>
-                  <Form.Control type="email" ref={loginEmailRef} required />
-                </Form.Group>
-                <Form.Group id="password">
-                  <Form.Label>Password</Form.Label>
-                  <Form.Control
-                    type="password"
-                    ref={loginPasswordRef}
-                    required
-                  />
-                </Form.Group>
-                <Button className="w-100 mt-2" type="submit" onClick={signin}>
-                  Login
-                </Button>
-                <div>{currentUser?.email}</div>
-              </Form>
-            </Card.Body>
-          </Card>
-          <div
-            className="w-100 text-center mt-2"
-            onClick={() => setSignIn(!signIn)}
-          >
-            New User? Sign up
-          </div>
-        </>
+      {!registerPage && (
+        <div>
+          <h3> Login </h3>
+          <input
+            placeholder="Email..."
+            onChange={(event) => {
+              setLoginEmail(event.target.value);
+            }}
+          />
+          <input
+            placeholder="Password..."
+            onChange={(event) => {
+              setLoginPassword(event.target.value);
+            }}
+          />
+
+          <button onClick={login}> Login</button>
+          <button onClick={toRegister}>New User</button>
+        </div>
       )}
 
-      <Button className="w-100 mt-2" type="submit" onClick={logOut}>
-        Log Out
-      </Button>
+      <h4> User Logged In: </h4>
+      {user?.email}
+
+      <button onClick={logout}> Sign Out </button>
     </div>
   );
 };
