@@ -19,7 +19,7 @@ const data = {
           },
         ],
         doing: [],
-        done: [,],
+        done: [],
       },
     },
   },
