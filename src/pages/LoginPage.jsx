@@ -10,18 +10,34 @@ import {
 import { Form, Card, Button } from "react-bootstrap";
 
 const LoginPage = () => {
-  const emailRef = useRef();
-  const passwordRef = useRef();
-  const passwordConfirmationRef = useRef();
+  const signupEmailRef = useRef();
+  const signupPasswordRef = useRef();
+  const signupPasswordConfirmationRef = useRef();
+
+  const loginEmailRef = useRef();
+  const loginPasswordRef = useRef();
+
   const currentUser = useAuth();
   const [signIn, setSignIn] = useState(false);
 
   const signup = async () => {
     await createUserWithEmailAndPassword(
       auth,
-      emailRef.current.value,
-      passwordRef.current.value
+      signupEmailRef.current.value,
+      signupPasswordRef.current.value
     );
+  };
+
+  const signin = async () => {
+    await signInWithEmailAndPassword(
+      auth,
+      loginEmailRef.current.value,
+      loginPasswordRef.current.value
+    );
+  };
+
+  const logOut = async () => {
+    signOut(auth);
   };
 
   return (
@@ -34,17 +50,21 @@ const LoginPage = () => {
               <Form>
                 <Form.Group id="email">
                   <Form.Label>Email</Form.Label>
-                  <Form.Control type="email" ref={emailRef} required />
+                  <Form.Control type="email" ref={signupEmailRef} required />
                 </Form.Group>
                 <Form.Group id="password">
                   <Form.Label>Password</Form.Label>
-                  <Form.Control type="password" ref={passwordRef} required />
+                  <Form.Control
+                    type="password"
+                    ref={signupPasswordRef}
+                    required
+                  />
                 </Form.Group>
                 <Form.Group id="password-confirm">
                   <Form.Label>Password Confirmation</Form.Label>
                   <Form.Control
                     type="password"
-                    ref={passwordConfirmationRef}
+                    ref={signupPasswordConfirmationRef}
                     required
                   />
                 </Form.Group>
@@ -67,17 +87,21 @@ const LoginPage = () => {
         <>
           <Card>
             <Card.Body>
-              <h2 className="text-center mb-4">Login Up</h2>
+              <h2 className="text-center mb-4">Login</h2>
               <Form>
                 <Form.Group id="email">
                   <Form.Label>Email</Form.Label>
-                  <Form.Control type="email" ref={emailRef} required />
+                  <Form.Control type="email" ref={loginEmailRef} required />
                 </Form.Group>
                 <Form.Group id="password">
                   <Form.Label>Password</Form.Label>
-                  <Form.Control type="password" ref={passwordRef} required />
+                  <Form.Control
+                    type="password"
+                    ref={loginPasswordRef}
+                    required
+                  />
                 </Form.Group>
-                <Button className="w-100 mt-2" type="submit" onClick={signup}>
+                <Button className="w-100 mt-2" type="submit" onClick={signin}>
                   Login
                 </Button>
                 <div>{currentUser?.email}</div>
@@ -92,6 +116,10 @@ const LoginPage = () => {
           </div>
         </>
       )}
+
+      <Button className="w-100 mt-2" type="submit" onClick={logOut}>
+        Log Out
+      </Button>
     </div>
   );
 };
