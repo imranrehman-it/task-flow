@@ -4,6 +4,8 @@ import data from "../components/BoardLists/data";
 import Board from "./Board";
 import styled from "styled-components";
 import { Typography } from "@mui/material";
+import { Auth } from "firebase/auth";
+import { auth } from "./firebase-config";
 
 function AllBoards() {
   return (

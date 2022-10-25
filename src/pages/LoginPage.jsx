@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import React, { useState, useRef } from "react";
 import styled from "styled-components";
 import { auth } from "./firebase-config";
 import {
@@ -8,75 +8,46 @@ import {
   signOut,
 } from "firebase/auth";
 
+import { Form, Card, Button } from "react-bootstrap";
+
 const LoginPage = () => {
-  const [registerEmail, setRegisterEmail] = useState("");
-  const [registerPassword, setRegisterPassword] = useState("");
-  const [loginEmail, setLoginEmail] = useState("");
-  const [loginPassword, setLoginPassword] = useState("");
-  const [user, setUser] = useState({});
-
-  onAuthStateChanged(auth, (currentUser) => {
-    setUser(currentUser);
-  });
-
-  const register = async () => {
-    try {
-      const user = await createUserWithEmailAndPassword(
-        auth,
-        registerEmail,
-        registerPassword
-      );
-      console.log(user);
-    } catch (error) {
-      console.log(error.message);
-    }
-  };
-
-  const login = async () => {
-    try {
-      const user = await signInWithEmailAndPassword(
-        auth,
-        loginEmail,
-        loginPassword
-      );
-    } catch (error) {
-      console.log(error.message);
-    }
-  };
-
-  const logout = async () => {
-    await signOut(auth);
-  };
+  const emailRef = useRef();
+  const passwordRef = useRef();
+  const passwordConfirmationRef = useRef();
 
   return (
-    <LoginPageStyle>
-      <h3>register user</h3>
-      <input
-        placeholder="username"
-        onChange={(event) => setRegisterEmail(event.target.value)}
-      ></input>
-      <input
-        placeholder="password"
-        onChange={(event) => setRegisterPassword(event.target.value)}
-      ></input>
-      <button onClick={register}>submit</button>
-      <h3>Login user</h3>
-      <input
-        placeholder="username"
-        onChange={(event) => setLoginEmail(event.target.value)}
-      ></input>
-      <input
-        placeholder="password"
-        onChange={(event) => setLoginPassword(event.target.value)}
-      ></input>
-      <button onClick={login}>login</button>
-      <button onClick={logout}>signout</button>
-    </LoginPageStyle>
+    <div>
+      <Card>
+        <Card.Body>
+          <h2 className="text-center mb-4">Sign Up</h2>
+          <Form>
+            <Form.Group id="email">
+              <Form.Label>Email</Form.Label>
+              <Form.Control type="email" ref={emailRef} required />
+            </Form.Group>
+            <Form.Group id="password">
+              <Form.Label>Password</Form.Label>
+              <Form.Control type="password" ref={passwordRef} required />
+            </Form.Group>
+            <Form.Group id="password-confirm">
+              <Form.Label>Password Confirmation</Form.Label>
+              <Form.Control
+                type="password"
+                ref={passwordConfirmationRef}
+                required
+              />
+            </Form.Group>
+            <Button className="w-100 mt-2" type="submit">
+              Sign Up
+            </Button>
+          </Form>
+        </Card.Body>
+      </Card>
+      <div className="w-100 text-center mt-2">
+        Already have an acount? Log In
+      </div>
+    </div>
   );
 };
-
-const LoginPageStyle = styled.div`
-  margin-top: 80px;
-`;
 
 export default LoginPage;
