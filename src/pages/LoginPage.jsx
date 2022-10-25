@@ -13,7 +13,7 @@ const LoginPage = () => {
   const [registerPassword, setRegisterPassword] = useState("");
   const [loginEmail, setLoginEmail] = useState("");
   const [loginPassword, setLoginPassword] = useState("");
-  const [registerPage, setReisterPage] = useState(true);
+  const [registerPage, setRegisterPage] = useState(true);
 
   const [user, setUser] = useState({});
 
@@ -68,6 +68,16 @@ const LoginPage = () => {
       });
   };
 
+  const toRegister = async () => {
+    await logout();
+    setRegisterPage(!registerPage);
+  };
+
+  const toLogin = async () => {
+    await logout();
+    setRegisterPage(!registerPage);
+  };
+
   return (
     <div className="App">
       {registerPage && (
@@ -87,10 +97,7 @@ const LoginPage = () => {
           />
 
           <button onClick={register}> Create User</button>
-          <button onClick={() => setReisterPage(!registerPage)}>
-            {" "}
-            already a user
-          </button>
+          <button onClick={toLogin}>already a user</button>
         </div>
       )}
       {!registerPage && (
@@ -110,6 +117,7 @@ const LoginPage = () => {
           />
 
           <button onClick={login}> Login</button>
+          <button onClick={toRegister}>New User</button>
         </div>
       )}
 
