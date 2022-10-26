@@ -100,6 +100,30 @@ export function addTodoToDB(userid, boardName, task, description, details) {
   });
 }
 
+export function addDoingToDB(userid, boardName, task, description, details) {
+  const reference = ref(
+    db,
+    "users/" + userid + "/Boards/" + boardName + "/doing/" + task
+  );
+  set(reference, {
+    title: "added task",
+    description: "testing adding task",
+    details: "specific details associated with this test",
+  });
+}
+
+export function addDoneToDB(userid, boardName, task, description, details) {
+  const reference = ref(
+    db,
+    "users/" + userid + "/Boards/" + boardName + "/done/" + task
+  );
+  set(reference, {
+    title: "added task",
+    description: "testing adding task",
+    details: "specific details associated with this test",
+  });
+}
+
 const reference = ref(db, "users/");
 onValue(reference, (snapshot) => {
   const data = snapshot.val();
