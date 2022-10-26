@@ -88,6 +88,18 @@ export function addBoardToDB(userid, boardName, boardDescription) {
   });
 }
 
+export function addTodoToDB(userid, boardName, task, description, details) {
+  const reference = ref(
+    db,
+    "users/" + userid + "/Boards/" + boardName + "/todo/" + task
+  );
+  set(reference, {
+    title: "added task",
+    description: "testing adding task",
+    details: "specific details associated with this test",
+  });
+}
+
 const reference = ref(db, "users/");
 onValue(reference, (snapshot) => {
   const data = snapshot.val();
