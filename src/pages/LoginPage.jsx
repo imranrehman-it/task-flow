@@ -6,7 +6,7 @@ import {
   signOut,
   getAuth,
 } from "firebase/auth";
-import { newUser } from "./firebase-config";
+import { newUser, addBoardToDB } from "./firebase-config";
 
 const LoginPage = () => {
   const [registerEmail, setRegisterEmail] = useState("");
@@ -125,6 +125,9 @@ const LoginPage = () => {
       {user?.email}
 
       <button onClick={logout}> Sign Out </button>
+      <button
+        onClick={() => addBoardToDB(user.uid, "New Board", "basic descrip")}
+      ></button>
     </div>
   );
 };
