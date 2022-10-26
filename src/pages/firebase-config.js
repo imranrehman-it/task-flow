@@ -5,7 +5,7 @@ import {
   onAuthStateChanged,
 } from "firebase/auth";
 
-import { getDatabase, ref, set } from "firebase/database";
+import { getDatabase, ref, set, onValue } from "firebase/database";
 import { useEffect, useState } from "react";
 
 const firebaseConfig = {
@@ -20,14 +20,19 @@ const firebaseConfig = {
 };
 
 const app = initializeApp(firebaseConfig);
+const db = getDatabase();
 
 export function writeUserData(userid, email) {
-  const db = getDatabase();
   const reference = ref(db, "users/" + userid);
-
   set(reference, {
     email: email,
   });
 }
+
+const reference = ref(db, "users/");
+onValue(reference, (snapshot) => {
+  const data = snapshot.val();
+  console.log(data);
+});
 
 export const auth = getAuth(app);
