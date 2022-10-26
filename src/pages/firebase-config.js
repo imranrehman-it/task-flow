@@ -4,11 +4,14 @@ import {
   createUserWithEmailAndPassword,
   onAuthStateChanged,
 } from "firebase/auth";
+
+import { getDatabase, ref, set } from "firebase/database";
 import { useEffect, useState } from "react";
 
 const firebaseConfig = {
   apiKey: "AIzaSyD5OH2lmrw-oAAhPFV4l1S2tqbRLwhOuhE",
   authDomain: "task-flow-dd651.firebaseapp.com",
+  databaseURL: "https://task-flow-dd651-default-rtdb.firebaseio.com",
   projectId: "task-flow-dd651",
   storageBucket: "task-flow-dd651.appspot.com",
   messagingSenderId: "827187165170",
@@ -17,5 +20,14 @@ const firebaseConfig = {
 };
 
 const app = initializeApp(firebaseConfig);
+
+export function writeUserData(userid, email) {
+  const db = getDatabase();
+  const reference = ref(db, "users/" + userid);
+
+  set(reference, {
+    email: email,
+  });
+}
 
 export const auth = getAuth(app);

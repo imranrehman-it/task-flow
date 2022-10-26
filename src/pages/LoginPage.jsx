@@ -6,7 +6,7 @@ import {
   signOut,
   getAuth,
 } from "firebase/auth";
-import { auth } from "./firebase-config";
+import { writeUserData } from "./firebase-config";
 
 const LoginPage = () => {
   const [registerEmail, setRegisterEmail] = useState("");
@@ -32,7 +32,7 @@ const LoginPage = () => {
       createUserWithEmailAndPassword(auth, registerEmail, registerPassword)
         .then((userCredential) => {
           const user = userCredential.user;
-          console.log("done");
+          writeUserData(user.uid, user.email);
         })
         .catch((error) => {
           console.log(error.code);
