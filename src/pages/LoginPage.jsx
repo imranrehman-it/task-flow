@@ -6,7 +6,13 @@ import {
   signOut,
   getAuth,
 } from "firebase/auth";
-import { auth } from "./firebase-config";
+import {
+  newUser,
+  addBoardToDB,
+  addTodoToDB,
+  addDoneToDB,
+  addDoingToDB,
+} from "./firebase-config";
 
 const LoginPage = () => {
   const [registerEmail, setRegisterEmail] = useState("");
@@ -32,7 +38,7 @@ const LoginPage = () => {
       createUserWithEmailAndPassword(auth, registerEmail, registerPassword)
         .then((userCredential) => {
           const user = userCredential.user;
-          console.log("done");
+          newUser(user.uid, user.email);
         })
         .catch((error) => {
           console.log(error.code);
@@ -125,6 +131,16 @@ const LoginPage = () => {
       {user?.email}
 
       <button onClick={logout}> Sign Out </button>
+      <button
+        onClick={() => addBoardToDB(user.uid, "New Board", "basic descrip")}
+      ></button>
+      <button
+        onClick={() =>
+          addDoingToDB(user.uid, "New Board", "added task", "P", "A")
+        }
+      >
+        add task
+      </button>
     </div>
   );
 };
