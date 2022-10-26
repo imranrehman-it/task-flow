@@ -59,9 +59,9 @@ export function newUser(userid, email) {
 }
 
 export function addBoardToDB(userid, boardName, boardDescription) {
-  const reference = ref(db, "users/" + userid + "/Boards/");
+  const reference = ref(db, "users/" + userid + "/Boards/" + boardName);
 
-  push(reference, {
+  set(reference, {
     title: boardName,
     image:
       "https://static.vecteezy.com/system/resources/previews/005/084/897/original/expert-marketing-broker-stock-trader-present-stock-market-in-year-showing-growth-rates-on-board-isolated-free-vector.jpg",
