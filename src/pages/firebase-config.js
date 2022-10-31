@@ -124,6 +124,23 @@ export function addDoneToDB(userid, boardName, task, description, details) {
   });
 }
 
+export function removeDoneToDB(userid, boardName, task, description, details) {
+  const reference = ref(
+    db,
+    "users/" + userid + "/Boards/" + boardName + "/done/" + task
+  );
+
+  reference.remove();
+}
+
+export function removeDoingToDB(userid, boardName, task, description, details) {
+  const reference = ref(
+    db,
+    "users/" + userid + "/Boards/" + boardName + "/doing/" + task
+  );
+  reference.remove();
+}
+
 const reference = ref(db, "users/");
 onValue(reference, (snapshot) => {
   const data = snapshot.val();
