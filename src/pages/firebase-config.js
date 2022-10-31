@@ -141,6 +141,14 @@ export function removeDoingToDB(userid, boardName, task, description, details) {
   reference.remove();
 }
 
+export function addTodoToDB(userid, boardName, task, description, details) {
+  const reference = ref(
+    db,
+    "users/" + userid + "/Boards/" + boardName + "/todo/" + task
+  );
+  reference.remove();
+}
+
 const reference = ref(db, "users/");
 onValue(reference, (snapshot) => {
   const data = snapshot.val();
